@@ -3,7 +3,6 @@ salt:
     master: 192.168.1.24
     mine_interval: 60
   master:
-    interface: "'::'"
     ipv6: True
     file_roots:
       base:
@@ -25,7 +24,7 @@ salt:
     git_pillar_root: pillar
     ext_pillar: 
       - git: 
-        - master ssh://git@github.com:rhbvkleef/salt.git:
+        - master git://github.com:rhbvkleef/salt.git:
           - env: base
     state_verbose: False
     state_output: mixed
