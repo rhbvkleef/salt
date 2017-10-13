@@ -1,0 +1,35 @@
+base:
+  packages:
+    - apt-transport-https
+    - apt-utils
+    - bash-completion
+    - dbus # needed for timedatectl
+    - dnsutils
+    - figlet
+    - git
+    - htop
+    - iotop
+    - iputils-ping
+    - iputils-tracepath
+    - less
+    - logrotate
+    - lsb-base
+    - man
+    - man-db
+    - nmap
+    - ntp
+    - patch
+    - rsync
+    - screen
+    - tcpdump
+    - telnet
+    - tmux
+    - toilet
+    - traceroute
+    - unzip
+    - vim
+    - wget
+    - whois
+    - zip
+    - zsh
+    - rsyslog
