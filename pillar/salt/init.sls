@@ -16,7 +16,7 @@ salt:
     gitfs_remotes:
       - ssh://git@github.com:rhbvkleef/salt.git:
         - root: salt
-      - ssh://git@git.iapc.utwente.nl/beheer-salt-formulas/salt-formula.git
+      - ssh://git@github.com:saltstack-formulas/salt-formula.git
     pillar_roots:
       base:
         - /srv/pillar
