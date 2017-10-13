@@ -3,6 +3,7 @@ salt:
     master: salt
     mine_interval: 60
   master:
+    interface: "0.0.0.0"
     ipv6: True
     file_roots:
       base:
@@ -13,9 +14,9 @@ salt:
       - git
       - roots
     gitfs_remotes:
-      - git://github.com:rhbvkleef/salt.git:
+      - git://github.com/rhbvkleef/salt.git:
         - root: salt
-      - git://github.com:saltstack-formulas/salt-formula.git
+      - git://github.com/saltstack-formulas/salt-formula.git
     pillar_roots:
       base:
         - /srv/pillar
@@ -24,7 +25,7 @@ salt:
     git_pillar_root: pillar
     ext_pillar: 
       - git: 
-        - master git://github.com:rhbvkleef/salt.git:
+        - master git://github.com/rhbvkleef/salt.git:
           - env: base
     state_verbose: False
     state_output: mixed
