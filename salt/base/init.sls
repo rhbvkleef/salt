@@ -27,11 +27,13 @@ sudoers:
     
 # Salt repository for latest versions of salt master and minions.
 salt-repo:
-  pkgrepo.managed:
-    - humanname: deb-9-SaltStack
-    - name: deb http://repo.saltstack.com/apt/debian/9/amd64/latest stretch main
-    - file: /etc/apt/sources.list.d/salt.list
-    - key_url: https://repo.saltstack.com/apt/debian/9/amd64/latest/SALTSTACK-GPG-KEY.pub
+  cmd.wait:
+    - name: wget -O - https://repo.saltstack.com/apt/debian/9/amd64/latest/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
+    - watch:
+      - file: salt-repo
+  file.managed:
+    - name: /etc/apt/sources.list.d/salt.list
+    - source: salt://base/files/salt.list
 
 # Force IPv4 usage for APT because IPv6 is buggy
 /etc/apt/apt.conf.d/99force-ipv4:
