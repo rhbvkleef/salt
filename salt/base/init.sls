@@ -12,7 +12,8 @@ rolf:
     - require:
       - group: sudoers
       - pkg: zsh
-    - groups: sudoers
+    - groups:
+      - sudoers
 
 sudoers:
   group.present:
