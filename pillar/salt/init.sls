@@ -1,6 +1,6 @@
 salt:
   minion:
-    master: localhost
+    master: salt
     mine_interval: 60
   master:
     ipv6: True
