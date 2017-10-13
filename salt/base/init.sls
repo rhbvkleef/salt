@@ -1,18 +1,18 @@
 
 # Create management user
-rolf:
-  user.present:
-    - name: rolf
-    - uid: 1000
-    - gid_from_name: True
-    - password: {{ salt['pillar.get']('user:root:passwdhash') }}
-    - shell: /bin/zsh
-    - home: /home/rolf
-    - createhome: True
-    - require:
-      - group: sudoers
-      - pkg: zsh
-    - groups: sudoers
+# rolf:
+#   user.present:
+#     - name: rolf
+#     - uid: 1000
+#     - gid_from_name: True
+#     - password: {{ salt['pillar.get']('user:root:passwdhash') }}
+#     - shell: /bin/zsh
+#     - home: /home/rolf
+#     - createhome: True
+#     - require:
+#       - group: sudoers
+#       - pkg: zsh
+#     - groups: sudoers
 
 sudoers:
   group.present:
