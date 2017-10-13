@@ -28,6 +28,7 @@ sudoers:
 # Salt repository for latest versions of salt master and minions.
 salt-repo:
   pkgrepo.managed:
+    - humanname: deb-9-SaltStack
     - name: deb http://repo.saltstack.com/apt/debian/9/amd64/latest stretch main
     - file: /etc/apt/sources.list.d/salt.list
     - key_url: https://repo.saltstack.com/apt/debian/9/amd64/latest/SALTSTACK-GPG-KEY.pub
