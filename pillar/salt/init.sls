@@ -1,0 +1,40 @@
+salt:
+  minion:
+    master: 192.168.1.24
+    mine_interval: 60
+  master:
+    interface: "'::'"
+    ipv6: True
+    file_roots:
+      base:
+        - /srv/salt
+    file_ignore_regex:
+      - '/\.git($|/)'
+    fileserver_backend:
+      - git
+      - roots
+    gitfs_remotes:
+      - ssh://git@github.com:rhbvkleef/salt.git:
+        - root: salt
+      - ssh://git@git.iapc.utwente.nl/beheer-salt-formulas/salt-formula.git
+    pillar_roots:
+      base:
+        - /srv/pillar
+    gitfs_provider: gitpython
+    git_pillar_provider: gitpython
+    git_pillar_root: pillar
+    ext_pillar: 
+      - git: 
+        - master ssh://git@github.com:rhbvkleef/salt.git:
+          - env: base
+    state_verbose: False
+    state_output: mixed
+    output: nested
+
+mine_functions:
+  network.interfaces: []
+  network.ip_addrs: []
+  grains.items: []
+  ssh_host_keys:
+    mine_function: ssh.host_keys
+    private: False
