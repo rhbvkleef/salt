@@ -1,0 +1,2 @@
+%sudoers        ALL=(ALL)       ALL
+Defaults	timestamp_timeout=30
