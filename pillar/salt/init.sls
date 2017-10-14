@@ -28,7 +28,7 @@ salt:
         - master git://github.com/rhbvkleef/salt.git:
           - env: base
     state_verbose: False
-    state_output: mixed
+    state_output: terse
     output: nested
 
 mine_functions:
