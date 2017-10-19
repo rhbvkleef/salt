@@ -40,3 +40,8 @@ add-config-file:
     - user: www-data
     - source: salt://sites/skicie-signon/files/config.php
     - template: jinja
+add-htaccess:
+  file.managed:
+    - name: /var/www/html/.htaccess
+    - user: www-data
+    - source: salt://sites/skicie-signon/files/.htaccess
