@@ -4,10 +4,10 @@ namespace Project;
 $cfg = [];
 
 // database configuration
-$cfg['database_host'] = "{{ pillar['skicie-signup']['db']['host'] }}";
-$cfg['database_pass'] = "{{ pillar['skicie-signup']['db']['pass'] }}";
-$cfg['database_user'] = "{{ pillar['skicie-signup']['db']['user'] }}";
-$cfg['database_db']   = "{{ pillar['skicie-signup']['db']['name'] }}";
+$cfg['database_host'] = "{{ salt[pillar.get]('skicie-signup:db:host') }}";
+$cfg['database_pass'] = "{{ salt[pillar.get]('skicie-signup:db:pass') }}";
+$cfg['database_user'] = "{{ salt[pillar.get]('skicie-signup:db:user') }}";
+$cfg['database_db']   = "{{ salt[pillar.get]('skicie-signup:db:name') }}";
 
 // specify possibility of enrolling and timeframe, if null will be ignored
 $cfg['can_enroll'] = false;
