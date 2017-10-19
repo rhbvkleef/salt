@@ -2,6 +2,10 @@ salt:
   minion:
     master: salt
     mine_interval: 60
+    smtp.from: root@{{grains['host']}}.{{grains['domain']}}
+    smtp.to: salt@rolfvankleef.nl
+    smtp.host: mail.vankleef.me
+    smtp.port: 25
   master:
     interface: "0.0.0.0"
     ipv6: True
