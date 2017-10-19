@@ -1,3 +1,9 @@
+create-db-user:
+  mysql_user.present:
+    - host: localhost
+    - name: {{ salt['pillar.get']('sites:skicie-signup:db:user') }}
+    - password: {{ salt['pillar.get']('sites:skicie-signup:db:pass') }}
+
 fix-www-perms:
   file.directory:
     - name: /var/www
@@ -33,3 +39,10 @@ clone-git-repo:
       - pkg: apache2
       - file: write-rsa-key
       - file: remove-default-index
+
+add-config-file:
+  file.managed:
+    - name: /var/www/html/config.php
+    - user: www-data
+    - source: salt://sites/skicie-signon/files/config.php
+    - template: jinja
