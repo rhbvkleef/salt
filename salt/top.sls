@@ -10,4 +10,7 @@ base:
     - php
     - mariadb.install
     - sql.mariadb
+  'applications:skicie-signon':
+    - match: grain
+    - sites.skicie-signon
     
