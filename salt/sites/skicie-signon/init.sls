@@ -1,9 +1,3 @@
-create-db-user:
-  mysql_user.present:
-    - host: localhost
-    - name: {{ salt['pillar.get']('sites:skicie-signup:db:user') }}
-    - password: {{ salt['pillar.get']('sites:skicie-signup:db:pass') }}
-
 fix-www-perms:
   file.directory:
     - name: /var/www
