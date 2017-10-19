@@ -16,6 +16,7 @@ clone-git-repo:
     - name: git@gitlab.ia.utwente.nl:SkiCie/SignupWebsite.git
     - target: /var/www/html
     - user: www-data
+    - identity: /root/.ssh/id_rsa
     - require:
       - pkg: apache2
       - file: write-rsa-key
