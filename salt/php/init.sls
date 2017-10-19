@@ -17,7 +17,7 @@ set-apache-config:
     - require:
       - pkg: apache2
 
-apache2:
+apache2-after-config-restart:
   service.running:
     - enable: True
     - reload: True
