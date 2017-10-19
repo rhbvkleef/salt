@@ -8,4 +8,5 @@ base:
   'applications:php':
     - match: grain
     - php
+    - mariadb.install
     

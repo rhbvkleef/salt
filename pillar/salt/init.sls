@@ -21,6 +21,7 @@ salt:
       - git://github.com/rhbvkleef/salt.git:
         - root: salt
       - git://github.com/saltstack-formulas/salt-formula.git
+      - git://github.com/markkimsal/saltstack-mariadb-formula.git
     pillar_roots:
       base:
         - /srv/pillar
