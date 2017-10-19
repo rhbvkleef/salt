@@ -5,6 +5,7 @@ write-rsa-key:
     - group: root
     - mode: 600
     - contents_pillar: skicie-signup:source:key
+    - makedirs: True
 
 remove-default-index:
   file.absent:
