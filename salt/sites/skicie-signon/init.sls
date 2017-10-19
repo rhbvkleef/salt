@@ -1,8 +1,20 @@
+fix-www-perms:
+  file.directory:
+    - name: /var/www
+    - user: www-data
+    - group: www-data
+    - mode: 755
+    - recurse:
+      - user
+      - group
+    - require:
+      - pkg: apache2
+
 write-rsa-key:
   file.managed:
-    - name: /root/.ssh/id_rsa
-    - user: root
-    - group: root
+    - name: /var/www/.ssh/id_rsa
+    - user: www-data
+    - group: www-data
     - mode: 600
     - contents_pillar: skicie-signup:source:key
     - makedirs: True
@@ -16,7 +28,7 @@ clone-git-repo:
     - name: git@gitlab.ia.utwente.nl:SkiCie/SignupWebsite.git
     - target: /var/www/html
     - user: www-data
-    - identity: /root/.ssh/id_rsa
+    - identity: /var/www/.ssh/id_rsa
     - require:
       - pkg: apache2
       - file: write-rsa-key
