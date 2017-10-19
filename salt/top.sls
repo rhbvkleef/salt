@@ -9,4 +9,5 @@ base:
     - match: grain
     - php
     - mariadb.install
+    - sql.mariadb
     
