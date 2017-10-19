@@ -19,6 +19,7 @@ set-apache-config:
 
 apache2-after-config-restart:
   service.running:
+    - name: apache2
     - enable: True
     - reload: True
     - watch:
