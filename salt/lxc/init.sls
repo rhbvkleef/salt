@@ -8,7 +8,7 @@
 container-{{ container['hostname'] }}:
   lxc.present:
     - name: {{ container['hostname'] }}
-    - template: debian
+    - profile: debian
     - running: true
     - options:
         arch: amd64
