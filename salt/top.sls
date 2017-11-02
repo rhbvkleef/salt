@@ -13,4 +13,7 @@ base:
   'applications:skicie-signon':
     - match: grain
     - sites.skicie-signon
+  'systype:hypervisor':
+    - match: grain
+    - lxc
     

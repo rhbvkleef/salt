@@ -7,6 +7,7 @@ base:
     - match: grain
     - lxc.profiles
     - lxc.packages
+    - lxc.containers
   'applications:php':
     - match: grain
     - php
