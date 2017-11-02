@@ -5,7 +5,7 @@
 {% endfor %}
 
 {% for container in pillar['lxc']['containers'] %}
-container-{{ container['hostname'] }}
+container-{{ container['hostname'] }}:
   lxc.present:
     - template: debian
     - running: true
