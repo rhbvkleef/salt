@@ -7,6 +7,7 @@
 {% for container in pillar['lxc']['containers'] %}
 container-{{ container['hostname'] }}:
   lxc.present:
+    - name: {{ container['hostname'] }}
     - template: debian
     - running: true
     - options:
