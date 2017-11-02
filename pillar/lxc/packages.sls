@@ -1,3 +1,4 @@
 lxc:
   packages:
     - lxc
+    - xfsprogs
