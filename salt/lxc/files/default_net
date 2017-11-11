@@ -1,0 +1,13 @@
+{%- set cfg = salt['pillar.get']('lxc:bridge', {}) %}
+USE_LXC_BRIDGE="{{ cfg.get('enabled', 'true') }}"
+LXC_BRIDGE="{{ cfg.get('name', 'lxcbr0') }}"
+LXC_ADDR="{{ cfg.get('addr', '10.0.3.1') }}"
+LXC_NETMASK="{{ cfg.get('netmask', '255.255.255.0') }}"
+LXC_NETWORK="{{ cfg.get('network', '10.0.3.0/24') }}"
+LXC_DHCP_RANGE="{{ cfg.get('dhcp_range', '10.0.3.2,10.0.3.254') }}"
+LXC_DHCP_MAX="{{ cfg.get('dhcp_hosts', '253') }}"
+{%- if 'dhcp_conf' in cfg %}
+LXC_DHCP_CONFILE={{ cfg.get('dhcp_conf') }}
+{%- endif %}
+
+LXC_DOMAIN="{{cfg.get('dhcp_domain', 'lxc') }}"

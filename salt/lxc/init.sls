@@ -3,13 +3,3 @@
 {{ package }}:
     pkg.latest
 {% endfor %}
-
-{% for container in pillar['lxc']['containers'] %}
-container-{{ container['hostname'] }}:
-  lxc.present:
-    - name: {{ container['hostname'] }}
-    - profile: debian
-    - running: true
-    - options:
-        arch: amd64
-{% endfor %}

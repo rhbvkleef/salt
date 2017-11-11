@@ -1,0 +1,10 @@
+{%- if 'mirror' in salt['pillar.get']('lxc',  {}) %}
+MIRROR="{{ salt['pillar.get']('lxc:mirror') }}"
+{%- endif %}
+
+LXC_AUTO="{{ salt['pillar.get']('lxc:auto', 'true')}}"
+
+USE_LXC_BRIDGE="{{ salt['pillar.get']('lxc:bridge:enabled', 'true') }}"  # overridden in lxc-net
+[ -f /etc/default/lxc-net ] && . /etc/default/lxc-net
+
+LXC_SHUTDOWN_TIMEOUT={{ salt['pillar.get']('lxc:timeout', 120) }}
