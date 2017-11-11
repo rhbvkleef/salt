@@ -22,7 +22,7 @@ lxc_defaults:
 lxc-net_defaults:
   file.managed:
     - name: /etc/default/lxc-net
-    - source: salt://lxc/templates/default_net
+    - source: salt://lxc/files/default_net
     - template: jinja
     - user: root
     - group: root
@@ -40,7 +40,7 @@ lxc-net_defaults:
 lxc_default_conf:
   file.managed:
     - name: /etc/lxc/default.conf
-    - source: salt://lxc/templates/lxc_default.conf
+    - source: salt://lxc/files/lxc_default.conf
     - template: jinja
     - user: root
     - group: root
