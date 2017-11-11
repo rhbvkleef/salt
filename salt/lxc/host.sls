@@ -28,7 +28,7 @@ lxc-net_defaults:
     - group: root
     - mode: 644
     - require:
-      -pkg: lxc
+      - pkg: lxc
   service:
     - running
     - name: lxc-net
