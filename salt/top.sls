@@ -16,4 +16,5 @@ base:
   'systype:hypervisor':
     - match: grain
     - lxc
+    - lxc.host
     
