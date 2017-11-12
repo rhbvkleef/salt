@@ -20,7 +20,9 @@ base:
     - ntp
     - patch
     - rsync
+    - rsyslog
     - screen
+    - sl
     - tcpdump
     - telnet
     - tmux
@@ -32,4 +34,3 @@ base:
     - whois
     - zip
     - zsh
-    - rsyslog
