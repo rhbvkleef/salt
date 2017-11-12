@@ -18,6 +18,17 @@ container-{{ container['hostname'] }}-autostart:
     - text: lxc.start.auto = 1
     - require:
       - lxc: container-{{ container['hostname'] }}
+
+container-{{ container['hostname'] }}-bootstrapped:
+  cmd.run:
+    {% if container['master'] is defined %}
+    - name: saltstrap -h {{ container['hostname'] }} -i {{ container['master'] }}
+    {% else %}
+    - name: saltstrap -h {{ container['hostname'] }}
+    {% endif %}
+    - onlyif: [ ! -f /var/lib/lxc/{{ container['hostname'] }}/bootstrapped ] && touch /var/lib/lxc/{{ container['hostname'] }}/bootstrapped
+    - require:
+      - file: lxc_bootstrap_script
 {% endfor %}
 
 lxc_defaults:
