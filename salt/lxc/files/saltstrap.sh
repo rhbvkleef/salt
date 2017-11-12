@@ -49,7 +49,7 @@ if [[ $? -ne 0 ]]; then
 fi
 
 echo "Accepting salt-key for host $HOST..."
-salt-key -a $HOST
+salt-key -a $HOST -y
 
 if [[ $? -ne 0 ]]; then
   echo "Salt-key accept failed!"
