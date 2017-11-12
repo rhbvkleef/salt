@@ -3,7 +3,8 @@ base:
     - salt.minion
     - base
     - sudo
-  'salt-master.rolfvankleef.nl':
+  'applications:salt-master':
+    - match: grain
     - salt.master
   'applications:php':
     - match: grain

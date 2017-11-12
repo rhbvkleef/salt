@@ -50,3 +50,12 @@ lxc_default_conf:
     - user: root
     - group: root
     - mode: 644
+
+lxc_bootstrap_script:
+  file.managed:
+    - name: /bin/lxcsaltstrap
+    - source: salt://lxc/files/saltstrap.sh
+    - template: jinja
+    - user: root
+    - group: root
+    - mode: 755
