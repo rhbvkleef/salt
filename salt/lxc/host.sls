@@ -6,8 +6,11 @@ container-{{ container['hostname'] }}:
     - running: true
     - options:
         arch: amd64
+container-{{ container['hostname']-running }}:
   lxc.running:
     - name: {{ container['hostname'] }}
+    - require:
+      - lxc: container-{{ container['hostname'] }}
 {% endfor %}
 
 lxc_defaults:
