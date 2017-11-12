@@ -11,6 +11,13 @@ container-{{ container['hostname'] }}-running:
     - name: {{ container['hostname'] }}
     - require:
       - lxc: container-{{ container['hostname'] }}
+
+container-{{ container['hostname'] }}-autostart:
+  file.append:
+    - name: /var/lib/lxc/{{ container['hostname'] }}/config
+    - text: lxc.start.auto = 1
+    - require:
+      - lxc: container-{{ container['hostname'] }}
 {% endfor %}
 
 lxc_defaults:
