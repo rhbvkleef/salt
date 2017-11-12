@@ -28,7 +28,7 @@ sudoers:
 # Salt repository for latest versions of salt master and minions.
 salt-repo:
   cmd.wait:
-    - name: wget -O - https://repo.saltstack.com/apt/debian/9/amd64/latest/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
+    - name: wget -O - https://repo.saltstack.com/apt/debian/9/amd64/latest/SALTSTACK-GPG-KEY.pub | apt-key add -
     - watch:
       - file: salt-repo
   file.managed:
