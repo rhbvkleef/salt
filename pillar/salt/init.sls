@@ -33,8 +33,8 @@ salt:
         - master git://github.com/rhbvkleef/salt.git:
           - env: base
     state_verbose: False
-    state_output: mixed
-    output: progress
+    state_output: changes
+    output: nested
 
 mine_functions:
   network.interfaces: []
