@@ -22,9 +22,9 @@ container-{{ container['hostname'] }}-autostart:
 container-{{ container['hostname'] }}-bootstrapped:
   cmd.run:
     {% if container['master'] is defined %}
-    - name: saltstrap -h {{ container['hostname'] }} -i {{ container['master'] }}
+    - name: lxcsaltstrap -h {{ container['hostname'] }} -i {{ container['master'] }}
     {% else %}
-    - name: saltstrap -h {{ container['hostname'] }}
+    - name: lxcsaltstrap -h {{ container['hostname'] }}
     {% endif %}
     - unless:
       - [ -f /var/lib/lxc/{{ container['hostname'] }}/bootstrapped ]
