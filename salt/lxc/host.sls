@@ -6,18 +6,15 @@ container-{{ container['hostname'] }}:
     - running: true
     - options:
         arch: amd64
-container-{{ container['hostname'] }}-running:
-  lxc.running:
-    - name: {{ container['hostname'] }}
-    - require:
-      - lxc: container-{{ container['hostname'] }}
 
+{% if container['autostart'] is defined and container['autostart'] %}
 container-{{ container['hostname'] }}-autostart:
   file.append:
     - name: /var/lib/lxc/{{ container['hostname'] }}/config
     - text: lxc.start.auto = 1
     - require:
       - lxc: container-{{ container['hostname'] }}
+{% endif %}
 
 container-{{ container['hostname'] }}-bootstrapped:
   cmd.run:
@@ -32,6 +29,7 @@ container-{{ container['hostname'] }}-bootstrapped:
       - touch /var/lib/lxc/{{ container['hostname'] }}/bootstrapped
     - require:
       - file: lxc_bootstrap_script
+      - lxc: container-{{ container['hostname'] }}
 {% endfor %}
 
 lxc_defaults:
