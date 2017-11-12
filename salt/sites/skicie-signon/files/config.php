@@ -1,4 +1,11 @@
 <?php
+/****************
+ * SALT WARNING *
+ ****************
+ * This file is salt-managed. Any changes made to this file may or may not be
+ * overridden. If changes need to be made in this file, make sure to ask a
+ * person who knows shit about salt. Proceed at your own risk!
+ */
 namespace Project;
 
 $cfg = [];

@@ -5,9 +5,5 @@
 # overridden. If changes need to be made in this file, make sure to ask a person
 # who knows shit about salt. Proceed at your own risk!
 
-Options +FollowSymLinks
-RewriteEngine On
-
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.php [L]
+[mysqld]
+bind-address = 0.0.0.0
