@@ -32,7 +32,7 @@ echo "Provisioning LXC machine $HOST on $HYPERVISOR."
 echo
 
 echo "Bootstrapping LXC container $HOST..."
-salt "$HYPERVISOR*" lxc.bootstrap $HOST
+salt-call lxc.bootstrap $HOST
 
 if [[ $? -ne 0 ]]; then
   echo "LXC bootstrap failed!"
