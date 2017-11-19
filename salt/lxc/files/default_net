@@ -17,4 +17,4 @@ LXC_DHCP_MAX="{{ cfg.get('dhcp_hosts', '253') }}"
 LXC_DHCP_CONFILE={{ cfg.get('dhcp_conf') }}
 {%- endif %}
 
-LXC_DOMAIN="{{cfg.get('dhcp_domain', 'vankleef.me') }}"
+LXC_DOMAIN="{{cfg.get('dhcp_domain', 'lxc') }}"
