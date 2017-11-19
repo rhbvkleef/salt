@@ -1,13 +1,16 @@
 base:
   'G@os:debian or G@os:ubuntu':
     - match: compound
-    - base
+    - base.packages
     - salt
-  'systype:hypervisor':
+  'systype:hypervisor:lxc':
     - match: grain
     - lxc.profiles
     - lxc.packages
     - lxc.containers
+  'systype:hypervisor:libvirt':
+    - match: grain
+    - libvirt.packages
   'applications:php':
     - match: grain
-    - php
+    - php.packages

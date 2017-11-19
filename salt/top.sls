@@ -14,8 +14,11 @@ base:
   'applications:skicie-signon':
     - match: grain
     - sites.skicie-signon
-  'systype:hypervisor':
+  'systype:hypervisor:lxc':
     - match: grain
     - lxc
     - lxc.host
+  'systype:hypervisor:libvirt':
+    - match: grain
+    - libvirt
     

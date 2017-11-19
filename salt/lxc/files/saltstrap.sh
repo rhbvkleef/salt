@@ -1,16 +1,16 @@
 #!/bin/bash
 
 HOST=""
-ME=`ip -4 addr show lxcbr0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'`
-MASTER=`hostname`
+MASTER='salt'
+HYPERVISOR=`hostname`
 while getopts "h:i:m:" opt; do
   echo $opt
   case $opt in
     h) HOST="$OPTARG"
     ;;
-    i) ME="$OPTARG"
+    i) MASTER="$OPTARG"
     ;;
-    m) MASTER="$OPTARG*"
+    m) HYPERVISOR="$OPTARG*"
     ;;
     \?) echo "Invalid option -$OPTARG" >&2
     ;;
@@ -28,24 +28,34 @@ if [[ $HOST == "" ]]; then
 fi
 
 
-echo "Provisioning LXC machine $HOST with master $MASTER"
+echo "Provisioning LXC machine $HOST on $HYPERVISOR."
 echo
-echo "Updating /etc/hosts of machine to make salt point to $ME..."
-lxc-attach --name=$HOST -- bash -c "echo $ME	salt >> /etc/hosts"
-
-if [[ $? -ne 0 ]]; then
-  echo "Hosts update failed!"
-  echo "Quitting..."
-  exit 3
-fi
 
 echo "Bootstrapping LXC container $HOST..."
-salt "$MASTER*" lxc.bootstrap $HOST
+salt "$HYPERVISOR*" lxc.bootstrap $HOST
 
 if [[ $? -ne 0 ]]; then
   echo "LXC bootstrap failed!"
   echo "Quitting..."
+  exit 3
+fi
+
+echo "Updating /minion config of machine to make salt point to $MASTER..."
+lxc-attach --name=$HOST -- bash -c "echo master: $MASTER >> /etc/salt/minion"
+
+if [[ $? -ne 0 ]]; then
+  echo "Hosts update failed!"
+  echo "Quitting..."
   exit 4
+fi
+
+echo 'Restarting minion...'
+lxc-attach --name=$HOST -- bash -c "systemctl restart salt-minion"
+
+if [[ $? -ne 0 ]]; then
+  echo "Minion restart failed!"
+  echo "Quitting..."
+  exit 5
 fi
 
 echo "Accepting salt-key for host $HOST..."
@@ -54,7 +64,7 @@ salt-key -a $HOST -y
 if [[ $? -ne 0 ]]; then
   echo "Salt-key accept failed!"
   echo "Quitting..."
-  exit 5
+  exit 6
 fi
 
 echo "LXC provisioning ran successfully!"
