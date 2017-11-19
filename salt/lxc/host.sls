@@ -16,6 +16,7 @@ container-{{ container['hostname'] }}-autostart:
       - lxc: container-{{ container['hostname'] }}
 {% endif %}
 
+{$ if (not container['autobootstrap'] is defined) or container['autobootstrap'] }
 container-{{ container['hostname'] }}-bootstrapped:
   cmd.run:
     {% if container['master'] is defined %}
