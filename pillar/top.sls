@@ -7,10 +7,11 @@ base:
     - match: grain
     - lxc.profiles
     - lxc.packages
-    - lxc.containers
   'systype:hypervisor:libvirt':
     - match: grain
     - libvirt.packages
   'applications:php':
     - match: grain
     - php.packages
+  'titan.vankleef.me':
+    - lxc.hypervisors.titan
