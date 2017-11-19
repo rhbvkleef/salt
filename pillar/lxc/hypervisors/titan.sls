@@ -1,6 +1,6 @@
 lxc:
   containers:
-    - venture
+    - venture:
       hostname: venture
       autostart: True
       master: salt.vankleef.me
