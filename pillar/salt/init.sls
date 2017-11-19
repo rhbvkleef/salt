@@ -1,6 +1,6 @@
 salt:
   minion:
-    master: salt
+    master: salt.vankleef.me
     mine_interval: 60
     smtp.from: root@{{grains['host']}}.{{grains['domain']}}
     smtp.to: salt@rolfvankleef.nl
