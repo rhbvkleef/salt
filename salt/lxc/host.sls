@@ -1,4 +1,7 @@
+# Loop through all lxc containers to configure them
 {% for container in pillar['lxc']['containers'] %}
+
+# Create the container
 container-{{ container['hostname'] }}:
   lxc.present:
     - name: {{ container['hostname'] }}
@@ -8,6 +11,8 @@ container-{{ container['hostname'] }}:
         arch: amd64
 
 {% if container['autostart'] is defined and container['autostart'] %}
+
+# Optionally enable the container autostart flag
 container-{{ container['hostname'] }}-autostart:
   file.append:
     - name: /var/lib/lxc/{{ container['hostname'] }}/config
@@ -17,6 +22,9 @@ container-{{ container['hostname'] }}-autostart:
 {% endif %}
 
 {% if (not container['autobootstrap'] is defined) or container['autobootstrap'] %}
+
+# Optionally bootstrap the container 
+# Currently has a bug when the hypervisor isn't the master: cannot salt-key -a {{ container['hostname'] }}
 container-{{ container['hostname'] }}-bootstrapped:
   cmd.run:
     {% if container['master'] is defined %}
@@ -31,6 +39,36 @@ container-{{ container['hostname'] }}-bootstrapped:
     - require:
       - file: lxc_bootstrap_script
       - lxc: container-{{ container['hostname'] }}
+{% endif %}
+
+{% if container['ip'] is defined %}
+
+# Set the static IP of the container
+container-{{ container['hostname'] }}-static-ip:
+  file.append:
+    - name: /var/lib/lxc/{{ container['hostname'] }}/config
+    - text: lxc.network.ipv4 = {{ container['ip'] }}
+    - require:
+      - lxc: container-{{ container['hostname'] }}
+
+{% if container['forward_ports'] is defined %}
+{% for port, settings in container['forward_ports'] %}
+
+# For all ports provided, forward them to the master interface specified
+container-{{ container['hostname'] }}-forward-{{ port }}:
+  iptables.append:
+    - table: nat
+    - chain: PREROUTING
+    - i: {{ settings['interface'] if settings['interface'] is defined else container['forward_interface'] }}
+    {% if settings['proto'] is defined %}
+    - proto: {{ settings['proto'] }}
+    {% endif %}
+    - dport: {{ port }}
+    - jump: DNAT
+    - to: {{ container['ip'] }}:{{ port }}
+
+{% endfor %}
+{% endif %}
 {% endif %}
 {% endfor %}
 

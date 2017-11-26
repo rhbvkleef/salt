@@ -21,4 +21,3 @@ base:
   'systype:hypervisor:libvirt':
     - match: grain
     - libvirt
-    
