@@ -55,7 +55,7 @@ container-{{ container['hostname'] }}-static-ip:
 {% for port, settings in container['forward_ports'] %}
 
 # For all ports provided, forward them to the master interface specified
-container-{{ container['hostname'] }}-forward-{{ port }}:
+container-{{ container['hostname'] }}-forward-{{ port }}-proto-{{ settings['proto'] }}:
   iptables.append:
     - table: nat
     - chain: PREROUTING
