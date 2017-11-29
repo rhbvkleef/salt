@@ -52,20 +52,20 @@ container-{{ container['hostname'] }}-static-ip:
       - lxc: container-{{ container['hostname'] }}
 
 {% if container['forward_ports'] is defined %}
-{% for port, settings in container['forward_ports'] %}
+{% for port_settings in container['forward_ports'] %}
 
 # For all ports provided, forward them to the master interface specified
-container-{{ container['hostname'] }}-forward-{{ port }}-proto-{{ settings['proto'] }}:
+container-{{ container['hostname'] }}-forward-{{ port_settings['from'] }}-proto-{{ port_settings['proto'] }}-to-{{ port_settings['to'] }}:
   iptables.append:
     - table: nat
     - chain: PREROUTING
-    - i: {{ settings['interface'] if settings['interface'] is defined else container['forward_interface'] }}
-    {% if settings['proto'] is defined %}
-    - proto: {{ settings['proto'] }}
+    - i: {{ port_settings['interface'] if port_settings['interface'] is defined else container['forward_interface'] }}
+    {% if port_settings['proto'] is defined %}
+    - proto: {{ port_settings['proto'] }}
     {% endif %}
-    - dport: {{ port }}
+    - dport: {{ port_settings['from'] }}
     - jump: DNAT
-    - to: {{ container['ip'] }}:{{ port }}
+    - to: {{ container['ip'] }}:{{ port_settings['to'] }}
 
 {% endfor %}
 {% endif %}

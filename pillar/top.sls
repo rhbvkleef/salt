@@ -15,3 +15,6 @@ base:
     - php.packages
   'titan.vankleef.me':
     - lxc.hypervisors.titan
+  # Testing configuration
+  'dauntless.rolfvankleef.nl':
+    - lxc.hypervisors.dauntless-testing
