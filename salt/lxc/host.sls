@@ -76,10 +76,7 @@ container-{{ container['hostname'] }}-forward-{{ port_settings['proto'] }}/{{ po
     - proto: {{ port_settings['proto'] }}
     {% endif %}
     - dport: {{ port_settings['to'] }}
-    - p: {{ port_settings['from'] }}
     - d: {{ container['ip'] }}
-    - match: state
-    - connstate: NEW,ESTABLISHED,RELATED
     - jump: ACCEPT
 
 {% endfor %}
