@@ -71,7 +71,6 @@ container-{{ container['hostname'] }}-preroute-{{ port_settings['proto'] }}/{{ p
 
 container-{{ container['hostname'] }}-forward-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to']}}:
   iptables.append:
-    - table: INPUT
     - chain: FORWARD
     {% if port_settings['proto'] is defined %}
     - proto: {{ port_settings['proto'] }}
@@ -79,7 +78,7 @@ container-{{ container['hostname'] }}-forward-{{ port_settings['proto'] }}/{{ po
     - dport: {{ port_settings['to'] }}
     - d: {{ container['ip'] }}
     - m: state
-    - state: NEW,ESTABLISHED,RELATED
+    - connstate: NEW,ESTABLISHED,RELATED
     - jump: ACCEPT
 
 {% endfor %}
