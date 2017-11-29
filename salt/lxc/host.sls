@@ -67,6 +67,7 @@ container-{{ container['hostname'] }}-preroute-{{ port_settings['proto'] }}/{{ p
     - dport: {{ port_settings['from'] }}
     - jump: DNAT
     - to: {{ container['ip'] }}:{{ port_settings['to'] }}
+    - save: True
 
 container-{{ container['hostname'] }}-forward-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to']}}:
   iptables.append:
@@ -77,6 +78,7 @@ container-{{ container['hostname'] }}-forward-{{ port_settings['proto'] }}/{{ po
     - dport: {{ port_settings['to'] }}
     - d: {{ container['ip'] }}
     - jump: ACCEPT
+    - save: True
 
 {% endfor %}
 {% endif %}
