@@ -47,7 +47,9 @@ container-{{ container['hostname'] }}-bootstrapped:
 container-{{ container['hostname'] }}-static-ip:
   file.append:
     - name: /var/lib/lxc/{{ container['hostname'] }}/config
-    - text: lxc.network.ipv4 = {{ container['ip'] }}
+    - text: |
+        lxc.network.ipv4 = {{ container['ip'] }}/24
+        lxc.network.ipv4.gateway = auto
     - require:
       - lxc: container-{{ container['hostname'] }}
 
