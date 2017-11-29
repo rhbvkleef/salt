@@ -66,7 +66,7 @@ container-{{ container['hostname'] }}-forward-{{ port_settings['from'] }}-proto-
     - proto: {{ port_settings['proto'] }}
     {% endif %}
     - dport: {{ port_settings['from'] }}
-    - jump: DNAT
+    - jump: REDIRECT
     - to: {{ container['ip'] }}:{{ port_settings['to'] }}
 
 {% endfor %}
