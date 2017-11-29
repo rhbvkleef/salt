@@ -61,7 +61,6 @@ container-{{ container['hostname'] }}-preroute-{{ port_settings['proto'] }}/{{ p
   iptables.append:
     - table: nat
     - chain: PREROUTING
-    - i: {{ port_settings['interface'] if port_settings['interface'] is defined else container['forward_interface'] }}
     {% if port_settings['proto'] is defined %}
     - proto: {{ port_settings['proto'] }}
     {% endif %}
