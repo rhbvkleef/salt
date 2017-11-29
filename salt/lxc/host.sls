@@ -57,7 +57,7 @@ container-{{ container['hostname'] }}-static-ip:
 {% for port_settings in container['forward_ports'] %}
 
 # For all ports provided, forward them to the master interface specified
-container-{{ container['hostname'] }}-forward-{{ port_settings['from'] }}-proto-{{ port_settings['proto'] }}-to-{{ port_settings['to'] }}:
+container-{{ container['hostname'] }}-preroute-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to'] }}:
   iptables.append:
     - table: nat
     - chain: PREROUTING
@@ -66,8 +66,20 @@ container-{{ container['hostname'] }}-forward-{{ port_settings['from'] }}-proto-
     - proto: {{ port_settings['proto'] }}
     {% endif %}
     - dport: {{ port_settings['from'] }}
-    - jump: REDIRECT
-    - to: {{ container['ip'] }}:{{ port_settings['to'] }}
+    - jump: DNAT
+    - to-destination: {{ container['ip'] }}:{{ port_settings['to'] }}
+
+container-{{ container['hostname'] }}-forward-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to']}}:
+  iptables.append:
+    - chain: FORWARD
+    {% if port_settings['proto'] is defined %}
+    - proto: {{ port_settings['proto'] }}
+    {% endif %}
+    - dport: {{ port_settings['to'] }}
+    - d: {{ container['ip'] }}
+    - m: state
+    - state: NEW,ESTABLISHED,RELATED
+    - jump: ACCEPT
 
 {% endfor %}
 {% endif %}
