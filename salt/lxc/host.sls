@@ -75,8 +75,8 @@ container-{{ container['hostname'] }}-forward-{{ port_settings['proto'] }}/{{ po
     {% if port_settings['proto'] is defined %}
     - proto: {{ port_settings['proto'] }}
     {% endif %}
-    - dport: {{ port_settings['to'] }}
-    - d: {{ container['ip'] }}
+    - sport: {{ port_settings['from'] }}
+    - s: {{ container['ip'] }}
     - jump: ACCEPT
     - save: True
 
