@@ -65,6 +65,7 @@ container-{{ container['hostname'] }}-preroute-{{ port_settings['proto'] }}/{{ p
     - proto: {{ port_settings['proto'] }}
     {% endif %}
     - dport: {{ port_settings['from'] }}
+    - d: {{ salt['network.interfaces']()[container['interface']]['inet'][0]['address'] }}
     - jump: DNAT
     - to: {{ container['ip'] }}:{{ port_settings['to'] }}
     - save: True

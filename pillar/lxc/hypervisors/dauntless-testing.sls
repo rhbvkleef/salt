@@ -5,7 +5,7 @@ lxc:
       master: salt.vankleef.me
       autobootstrap: False
       ip: 10.0.3.10
-      forward_interface: enp0s3
+      interface: enp0s3
       forward_ports:
         - from: 80
           to: 80
