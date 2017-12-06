@@ -5,7 +5,7 @@ lxc:
       master: salt.vankleef.me
       autobootstrap: False
       ip: 10.0.3.10
-      forward_interface: eno1
+      interface: eno1
       forward_ports:
         - from: 4505
           to: 4505
