@@ -29,7 +29,7 @@ container-{{ container['hostname'] }}-bootstrapped:
   cmd.run:
     {% if container['master'] is defined %}
     - name: lxcsaltstrap -h {{ container['hostname'] }} -i {{ container['master'] }}
-    {% elseif pillar['lxc']['master'] is defined %}
+    {% elif pillar['lxc']['master'] is defined %}
     - name: lxcsaltstrap -h {{ container['hostname'] }} -i {{ pillar['lxc']['master'] }}
     {% else %}
     - name: lxcsaltstrap -h {{ container['hostname'] }}
@@ -74,7 +74,7 @@ container-{{ container['hostname'] }}-preroute-{{ interface }}-{{ port_settings[
     - to: {{ container['ip'] }}:{{ port_settings['to'] }}
     - save: True
 {% endfor %}
-{% elseif pillar['lxc']['interface'] is defined %}
+{% elif pillar['lxc']['interface'] is defined %}
 # Otherwise, if the hypervisor has a default interface, use that one
 container-{{ container['hostname'] }}-preroute-{{ interface }}-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to'] }}:
   iptables.append:
