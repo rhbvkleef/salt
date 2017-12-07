@@ -57,6 +57,22 @@ container-{{ container['hostname'] }}-static-ip:
 {% for port_settings in container['forward_ports'] %}
 
 # For all ports provided, forward them to the master interface specified
+{% if port_settings['interfaces'] is defined %}
+{% for interface in port_settings['interfaces']}
+container-{{ container['hostname'] }}-preroute-{{ interface }}-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to'] }}:
+  iptables.append:
+    - table: nat
+    - chain: PREROUTING
+    {% if port_settings['proto'] is defined %}
+    - proto: {{ port_settings['proto'] }}
+    {% endif %}
+    - dport: {{ port_settings['from'] }}
+    - d: {{ salt['network.interfaces']()[interface]['inet'][0]['address'] }}
+    - jump: DNAT
+    - to: {{ container['ip'] }}:{{ port_settings['to'] }}
+    - save: True
+{% endfor %}
+{% else %}
 container-{{ container['hostname'] }}-preroute-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to'] }}:
   iptables.append:
     - table: nat
@@ -69,6 +85,7 @@ container-{{ container['hostname'] }}-preroute-{{ port_settings['proto'] }}/{{ p
     - jump: DNAT
     - to: {{ container['ip'] }}:{{ port_settings['to'] }}
     - save: True
+{% endif %}
 
 container-{{ container['hostname'] }}-forward-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to']}}:
   iptables.append:

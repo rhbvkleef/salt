@@ -10,6 +10,14 @@ lxc:
         - from: 80
           to: 80
           proto: tcp
+          interfaces:
+            - enp0s3
+            - lo
+            - lxcbr0
         - from: 443
           to: 443
           proto: tcp
+          interfaces:
+            - enp0s3
+            - lo
+            - lxcbr0
