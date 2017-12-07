@@ -3,18 +3,20 @@ base:
     - match: compound
     - base.packages
     - salt
-  'systype:hypervisor:lxc':
-    - match: grain
-    - lxc.profiles
-    - lxc.packages
-  'systype:hypervisor:libvirt':
-    - match: grain
-    - libvirt.packages
+
   'applications:php':
     - match: grain
     - php.packages
+
+  # Primary hypervisor
   'titan.vankleef.me':
     - lxc.hypervisors.titan
+    - libvirt.packages
+    - lxc.packages
+    - lxc.profiles
+  
   # Testing configuration
   'dauntless.rolfvankleef.nl':
     - lxc.hypervisors.dauntless-testing
+    - lxc.packages
+    - lxc.profiles

@@ -1,0 +1,22 @@
+[Unit]
+Description=Gogs - A painless self-hosted Git service
+After=syslog.target
+After=network.target
+
+[Service]
+# Modify these two values and uncomment them if you have
+# repos with lots of files and get an HTTP error 500 because
+# of that
+###
+#LimitMEMLOCK=infinity
+#LimitNOFILE=65535
+Type=simple
+WorkingDirectory=/opt/gogs
+ExecStart=/opt/gogs/gogs web
+User=git
+Group=git
+Restart=always
+Environment=USER=git HOME=/home/git
+
+[Install]
+WantedBy=multi-user.target

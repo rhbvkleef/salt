@@ -14,6 +14,9 @@ rolf:
       - pkg: zsh
     - groups:
       - sudoers
+      - libvirt
+      - libvirt-qemu
+      - kvm
 
 sudoers:
   group.present:

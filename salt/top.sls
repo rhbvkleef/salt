@@ -21,3 +21,9 @@ base:
   'systype:hypervisor:libvirt':
     - match: grain
     - libvirt
+
+  'robinson':
+    - mariadb.install
+
+  'trident':
+    - gogs

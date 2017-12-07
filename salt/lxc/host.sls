@@ -10,7 +10,7 @@ container-{{ container['hostname'] }}:
     - options:
         arch: amd64
 
-{% if container['autostart'] is defined and container['autostart'] %}
+{% if (not (container['autostart'] is defined)) or container['autostart'] %}
 
 # Optionally enable the container autostart flag
 container-{{ container['hostname'] }}-autostart:
@@ -29,6 +29,8 @@ container-{{ container['hostname'] }}-bootstrapped:
   cmd.run:
     {% if container['master'] is defined %}
     - name: lxcsaltstrap -h {{ container['hostname'] }} -i {{ container['master'] }}
+    {% elseif pillar['lxc']['master'] is defined %}
+    - name: lxcsaltstrap -h {{ container['hostname'] }} -i {{ pillar['lxc']['master'] }}
     {% else %}
     - name: lxcsaltstrap -h {{ container['hostname'] }}
     {% endif %}
@@ -56,8 +58,8 @@ container-{{ container['hostname'] }}-static-ip:
 {% if container['forward_ports'] is defined %}
 {% for port_settings in container['forward_ports'] %}
 
-# For all ports provided, forward them to the master interface specified
 {% if port_settings['interfaces'] is defined %}
+# If a list of interfaces is given, define a forward for each of the interfaces
 {% for interface in port_settings['interfaces'] %}
 container-{{ container['hostname'] }}-preroute-{{ interface }}-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to'] }}:
   iptables.append:
@@ -72,7 +74,22 @@ container-{{ container['hostname'] }}-preroute-{{ interface }}-{{ port_settings[
     - to: {{ container['ip'] }}:{{ port_settings['to'] }}
     - save: True
 {% endfor %}
+{% elseif pillar['lxc']['interface'] is defined %}
+# Otherwise, if the hypervisor has a default interface, use that one
+container-{{ container['hostname'] }}-preroute-{{ interface }}-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to'] }}:
+  iptables.append:
+    - table: nat
+    - chain: PREROUTING
+    {% if port_settings['proto'] is defined %}
+    - proto: {{ port_settings['proto'] }}
+    {% endif %}
+    - dport: {{ port_settings['from'] }}
+    - d: {{ salt['network.interfaces']()[pillar['lxc']['interface']]['inet'][0]['address'] }}
+    - jump: DNAT
+    - to: {{ container['ip'] }}:{{ port_settings['to'] }}
+    - save: True
 {% else %}
+# Otherwise, make a reasonable assumption of the interface
 container-{{ container['hostname'] }}-preroute-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to'] }}:
   iptables.append:
     - table: nat
@@ -87,6 +104,7 @@ container-{{ container['hostname'] }}-preroute-{{ port_settings['proto'] }}/{{ p
     - save: True
 {% endif %}
 
+# Reverse forward of the port
 container-{{ container['hostname'] }}-forward-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to']}}:
   iptables.append:
     - chain: FORWARD
