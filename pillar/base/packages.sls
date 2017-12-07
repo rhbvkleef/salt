@@ -8,6 +8,7 @@ base:
     - figlet
     - git
     - htop
+    - iftop
     - iotop
     - iputils-ping
     - iputils-tracepath
