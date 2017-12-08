@@ -36,6 +36,7 @@ gogs-config:
     - user: git
     - group: git
     - makedirs: True
+    - template: jinja
     - requires: 
       - cmd: gogs
       - user: gogs
