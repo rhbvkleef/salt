@@ -20,3 +20,6 @@ base:
     - lxc.hypervisors.dauntless-testing
     - lxc.packages
     - lxc.profiles
+
+  'odyssey':
+    - apache-proxy.odyssey
