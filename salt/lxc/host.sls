@@ -76,7 +76,7 @@ container-{{ container['hostname'] }}-preroute-{{ interface }}-{{ port_settings[
 {% endfor %}
 {% elif pillar['lxc']['interface'] is defined %}
 # Otherwise, if the hypervisor has a default interface, use that one
-container-{{ container['hostname'] }}-preroute-{{ interface }}-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to'] }}:
+container-{{ container['hostname'] }}-preroute-{{ port_settings['proto'] }}/{{ port_settings['from'] }}-to-{{ port_settings['to'] }}:
   iptables.append:
     - table: nat
     - chain: PREROUTING

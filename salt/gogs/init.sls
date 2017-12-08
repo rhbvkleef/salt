@@ -33,5 +33,10 @@ gogs-config:
   file.managed:
     - name: /opt/gogs/custom/conf/app.ini
     - source: salt://gogs/gogs.config
+    - user: git
+    - group: git
+    - makedirs: True
+    - template: jinja
     - requires: 
       - cmd: gogs
+      - user: gogs
