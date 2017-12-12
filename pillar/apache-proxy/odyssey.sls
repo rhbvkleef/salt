@@ -21,7 +21,7 @@ apache:
 
       LogLevel: warn
       CustomLog: ${APACHE_LOG_DIR}/access.log
-      LogFormat: combined \#
+      LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
 
       SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
