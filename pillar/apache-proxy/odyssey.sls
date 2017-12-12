@@ -21,7 +21,7 @@ apache:
       ServerAdmin: webmaster@vankleef.me
 
       LogLevel: warn
-      CustomLog: ${APACHE_LOG_DIR}/access.log
+      CustomLog: ${APACHE_LOG_DIR}/access.log combined
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
       
