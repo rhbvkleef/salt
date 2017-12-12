@@ -16,6 +16,10 @@ lxc:
     # SQL servers (MySQL/MariaDB and PostgreSQL)
     - hostname: robinson
       ip: 10.0.3.11
+      forward_ports:
+        - from: 5432
+          to: 5432
+          proto: tcp
 
     # Git server
     - hostname: trident

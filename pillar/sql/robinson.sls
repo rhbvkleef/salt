@@ -1,6 +1,9 @@
 {%- import_yaml "/srv/pillar/sql/robinson_private.sls" as robinson %}
 
 postgres:
+  postgresconf: |
+    listen_addresses = '*'
+
   users:
     swipe-test:
       ensure: present
