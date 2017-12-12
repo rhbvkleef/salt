@@ -13,9 +13,27 @@ apache:
       port: 443
 
   sites:
-    git.vankleef.me: # must be unique; used as an ID declaration in Salt.
+    git.vankleef.me:
       enabled: True
-      template_file: salt://apache/vhosts/proxy.tmpl # or minimal.tmpl or redirect.tmpl or proxy.tmpl
+      port: 80
+      template_file: salt://apache/vhosts/proxy.tmpl
+
+      ServerAdmin: webmaster@vankleef.me
+
+      LogLevel: warn
+      CustomLog: ${APACHE_LOG_DIR}/access.log
+      LogFormat: combined
+      ErrorLog: ${APACHE_LOG_DIR}/error.log
+
+      ProxyRoute:
+        git:
+          ProxyPassTarget: 'http://10.0.3.12:3000/'
+    git.vankleef.me-ssl:
+      enabled: True
+      port: 443
+      template_file: salt://apache/vhosts/proxy.tmpl
+
+      ServerName: git.vankleef.me
 
       ServerAdmin: webmaster@vankleef.me
 
