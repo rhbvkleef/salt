@@ -68,10 +68,10 @@ container-{{ container['hostname'] }}-preroute-{{ interface }}-{{ port_settings[
     {% if port_settings['proto'] is defined %}
     - proto: {{ port_settings['proto'] }}
     {% endif %}
-    - dport: {{ port_settings['from'] }}
+    - dport: {{ port_settings['to'] }}
     - d: {{ salt['network.interfaces']()[interface]['inet'][0]['address'] }}
     - jump: DNAT
-    - to: {{ container['ip'] }}:{{ port_settings['to'] }}
+    - to: {{ container['ip'] }}:{{ port_settings['from'] }}
     - save: True
 {% endfor %}
 {% elif pillar['lxc']['interface'] is defined %}
@@ -83,10 +83,10 @@ container-{{ container['hostname'] }}-preroute-{{ port_settings['proto'] }}/{{ p
     {% if port_settings['proto'] is defined %}
     - proto: {{ port_settings['proto'] }}
     {% endif %}
-    - dport: {{ port_settings['from'] }}
+    - dport: {{ port_settings['to'] }}
     - d: {{ salt['network.interfaces']()[pillar['lxc']['interface']]['inet'][0]['address'] }}
     - jump: DNAT
-    - to: {{ container['ip'] }}:{{ port_settings['to'] }}
+    - to: {{ container['ip'] }}:{{ port_settings['from'] }}
     - save: True
 {% else %}
 # Otherwise, make a reasonable assumption of the interface
@@ -97,10 +97,10 @@ container-{{ container['hostname'] }}-preroute-{{ port_settings['proto'] }}/{{ p
     {% if port_settings['proto'] is defined %}
     - proto: {{ port_settings['proto'] }}
     {% endif %}
-    - dport: {{ port_settings['from'] }}
+    - dport: {{ port_settings['to'] }}
     - d: {{ salt['network.interfaces']()[container['interface']]['inet'][0]['address'] }}
     - jump: DNAT
-    - to: {{ container['ip'] }}:{{ port_settings['to'] }}
+    - to: {{ container['ip'] }}:{{ port_settings['from'] }}
     - save: True
 {% endif %}
 
