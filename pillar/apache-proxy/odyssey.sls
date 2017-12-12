@@ -59,6 +59,7 @@ apache:
       - proxy_http
       - ssl
       - rewrite
+      - headers
 
   keepalive: 'On'
 
