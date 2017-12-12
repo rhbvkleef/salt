@@ -4,10 +4,6 @@ base:
     - base.packages
     - salt
 
-  'applications:php':
-    - match: grain
-    - php.packages
-
   # Primary hypervisor
   'titan.vankleef.me':
     - lxc.hypervisors.titan
@@ -20,6 +16,7 @@ base:
     - lxc.hypervisors.dauntless-testing
     - lxc.packages
     - lxc.profiles
-
+  
+  # Apache proxy
   'odyssey':
     - apache-proxy.odyssey

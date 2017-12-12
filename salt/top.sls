@@ -3,15 +3,12 @@ base:
     - salt.minion
     - base
 
-  'systype:hypervisor:lxc':
-    - match: grain
+  # Primary hypervisor
+  'titan.vankleef.me':
     - lxc
     - lxc.host
-
-  'systype:hypervisor:libvirt':
-    - match: grain
     - libvirt
-  
+
   # Salt master
   'venture':
     - salt.master
