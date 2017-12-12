@@ -17,8 +17,6 @@ apache:
       enabled: True
       port: 80
       template_file: salt://apache/vhosts/standard.tmpl
-      
-      ServerName: '*'
 
       ServerAdmin: webmaster@vankleef.me
 
