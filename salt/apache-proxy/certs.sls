@@ -8,7 +8,7 @@ apache_certs:
     - email: {{ pillar['apache']['pki']['email'] }}
     - renew: 14
     - require:
-      pkg: python-certbot
+      - pkg: python-certbot
 
 python-certbot:
   pkg.latest
