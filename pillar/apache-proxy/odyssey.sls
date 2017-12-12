@@ -15,9 +15,8 @@ apache:
   sites:
     git.vankleef.me: # must be unique; used as an ID declaration in Salt.
       enabled: True
-      template_file: salt://apache/vhosts/standard.tmpl # or minimal.tmpl or redirect.tmpl or proxy.tmpl
+      template_file: salt://apache/vhosts/redirect.tmpl # or minimal.tmpl or redirect.tmpl or proxy.tmpl
 
-      ServerName: git.vankleef.me # uses the unique ID above unless specified
       ServerAlias: www.git.vankleef.me
 
       ServerAdmin: webmaster@vankleef.me

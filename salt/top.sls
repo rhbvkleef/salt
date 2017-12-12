@@ -38,4 +38,7 @@ base:
   # Apache proxy server
   'odyssey':
     - apache-proxy.certs
-    - apache.debian_full
+    - apache.vhosts.standard
+    - apache.no_default_vhost
+    - apache.modules
+    - apache.config
