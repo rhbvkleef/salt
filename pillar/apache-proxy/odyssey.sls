@@ -19,6 +19,9 @@ apache:
 
       ServerAdmin: webmaster@vankleef.me
 
+      CustomLog: ${APACHE_LOG_DIR}/access.log combined
+      ErrorLog: ${APACHE_LOG_DIR}/error.log
+
       SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
       SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
 
