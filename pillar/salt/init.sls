@@ -20,9 +20,10 @@ salt:
     gitfs_remotes:
       - git://github.com/rhbvkleef/salt.git:
         - root: salt
-      - git://github.com/saltstack-formulas/salt-formula.git
       - git://github.com/markkimsal/saltstack-mariadb-formula.git
+      - git://github.com/saltstack-formulas/salt-formula.git
       - git://github.com/saltstack-formulas/apache-formula.git
+      - git://github.com/saltstack-formulas/postgres-formula.git
     pillar_roots:
       base:
         - /srv/pillar

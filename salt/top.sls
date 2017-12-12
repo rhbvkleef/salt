@@ -16,6 +16,7 @@ base:
   # MySQL server
   'robinson':
     - mariadb.install
+    - postgres
   
   # Git server
   'trident':
@@ -28,3 +29,7 @@ base:
     - apache.no_default_vhost
     - apache.modules
     - apache.config
+
+  # Sonatype Nexus
+  'excalibur':
+    - nexus
