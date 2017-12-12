@@ -1,4 +1,4 @@
-{%- import_yaml "sql/robinson.sls" as robinson %}
+{%- import_yaml "sql/robinson_private.sls" as robinson %}
 
 postgres:
   users:
