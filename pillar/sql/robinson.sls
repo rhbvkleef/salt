@@ -1,11 +1,10 @@
-include:
-  - sql.robinson_private
+{%- import_yaml "sql/robinson.sls" as robinson %}
 
 postgres:
   users:
     swipe-test:
       ensure: present
-      password: {{ pillar['postgres_private']['swipe-test-password'] }}
+      password: {{ robinson['postgres_private']['swipe-test-password'] }}
       createdb: False
       createroles: False
       createuser: False
