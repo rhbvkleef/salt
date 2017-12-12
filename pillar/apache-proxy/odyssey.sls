@@ -51,7 +51,7 @@ apache:
         git:
           ProxyPassTarget: 'http://10.0.3.12:3000/'
 
-      Formula_Append: Header always set Strict-Transport-Security "max-age 63072000; includeSubdomains;"
+      Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 
   modules:
     enabled:
