@@ -58,14 +58,5 @@ if [[ $? -ne 0 ]]; then
   exit 5
 fi
 
-echo "Accepting salt-key for host $HOST..."
-salt-key -a $HOST -y
-
-if [[ $? -ne 0 ]]; then
-  echo "Salt-key accept failed!"
-  echo "Quitting..."
-  exit 6
-fi
-
 echo "LXC provisioning ran successfully!"
 exit 0
