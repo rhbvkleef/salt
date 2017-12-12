@@ -27,6 +27,10 @@ lxc:
     - hostname: trident
       autobootstrap: False
       ip: 10.0.3.12
+      forward_ports:
+        - from: 22
+          to: 2200
+          proto: tcp
 
     # Apache proxy server
     - hostname: odyssey
