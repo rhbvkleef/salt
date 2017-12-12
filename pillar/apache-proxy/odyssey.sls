@@ -56,7 +56,6 @@ apache:
       - proxy
       - proxy_http
       - ssl
-    disabled:
       - rewrite
 
   keepalive: 'On'
