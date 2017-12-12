@@ -19,15 +19,19 @@ apache:
 
       ServerAdmin: webmaster@vankleef.me
 
-      CustomLog: ${APACHE_LOG_DIR}/access.log combined
+      LogLevel: warn
+      CustomLog: ${APACHE_LOG_DIR}/access.log
       ErrorLog: ${APACHE_LOG_DIR}/error.log
 
       SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
       SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
 
-      ProxyRequests: Off
-      ProxyPreserveHost: On
-      ProxyPassTarget: http://10.0.3.12/
+      ProxyRequests: 'Off'
+      ProxyPreserveHost: 'On'
+
+      ProxyRoute:
+        git:
+          ProxyPassTarget: 'http://10.0.3.12:3000/'
 
   modules:
     enabled:
