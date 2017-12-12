@@ -49,3 +49,12 @@ sshd:
     - enable: True
     - require:
       - pkg: sshd
+
+sudo:
+  pkg.latest:
+    - name: sudo
+  file.managed:
+    - name: /etc/sudoers.d/sudoers_group
+    - source: salt://base/files/sudoers_group
+    - makedirs: True
+    - mode: 440

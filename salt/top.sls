@@ -2,17 +2,6 @@ base:
   '*':
     - salt.minion
     - base
-    - sudo
-
-  'applications:php':
-    - match: grain
-    - php
-    - mariadb.install
-    - sql.mariadb
-
-  'applications:skicie-signon':
-    - match: grain
-    - sites.skicie-signon
 
   'systype:hypervisor:lxc':
     - match: grain
