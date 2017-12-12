@@ -16,7 +16,9 @@ apache:
     git.vankleef.me:
       enabled: True
       port: 80
-      template_file: salt://apache/vhosts/proxy.tmpl
+      template_file: salt://apache/vhosts/standard.tmpl
+      
+      ServerName: *
 
       ServerAdmin: webmaster@vankleef.me
 
@@ -24,10 +26,12 @@ apache:
       CustomLog: ${APACHE_LOG_DIR}/access.log
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
+      
+      Rewrite: |
+        RewriteCond %{HTTPS} off [OR]
+        RewriteCond %{HTTP:X-ForwardedProto} !https
+        RewriteRule ^/(.*) https://%{HTTP_HOST}/$1 [NC,R=301,L]
 
-      ProxyRoute:
-        git:
-          ProxyPassTarget: 'http://10.0.3.12:3000/'
     git.vankleef.me-ssl:
       enabled: True
       port: 443
