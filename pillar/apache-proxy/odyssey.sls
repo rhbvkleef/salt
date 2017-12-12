@@ -21,13 +21,11 @@ apache:
 
       LogLevel: warn
       CustomLog: ${APACHE_LOG_DIR}/access.log
+      LogFormat: ""
       ErrorLog: ${APACHE_LOG_DIR}/error.log
 
       SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
       SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
-
-      ProxyRequests: 'Off'
-      ProxyPreserveHost: 'On'
 
       ProxyRoute:
         git:
