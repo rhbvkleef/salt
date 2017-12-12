@@ -38,3 +38,4 @@ base:
   # Apache proxy server
   'odyssey':
     - apache-proxy.certs
+    - apache
