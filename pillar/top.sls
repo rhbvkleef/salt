@@ -20,3 +20,6 @@ base:
   # Apache proxy
   'odyssey':
     - apache-proxy.odyssey
+
+  'robinson':
+    - sql.robinson
