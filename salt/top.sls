@@ -38,4 +38,4 @@ base:
   # Apache proxy server
   'odyssey':
     - apache-proxy.certs
-    - apache
+    - apache.debian_full

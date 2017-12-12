@@ -13,9 +13,6 @@ apache:
       port: 443
 
   sites:
-    example.net:
-      template_file: salt://apache/vhosts/minimal.tmpl
-
     git.vankleef.me: # must be unique; used as an ID declaration in Salt.
       enabled: True
       template_file: salt://apache/vhosts/standard.tmpl # or minimal.tmpl or redirect.tmpl or proxy.tmpl
