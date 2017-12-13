@@ -19,3 +19,6 @@ postgres:
       owner: 'swipe-test'
       lc_ctype: 'en_US.UTF-8'
       lc_collate: 'en_US.UTF-8'
+
+  acls:
+    - ['host', 'all', 'all', '0.0.0.0/0']
