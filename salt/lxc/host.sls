@@ -44,9 +44,7 @@ container-{{ container['hostname'] }}-bootstrapped:
     - name: lxcsaltstrap -h {{ container['hostname'] }}
     {% endif %}
     - unless:
-      - [ -f /var/lib/lxc/{{ container['hostname'] }}/bootstrapped ]
-    - onlyif:
-      - touch /var/lib/lxc/{{ container['hostname'] }}/bootstrapped
+      - [ -f /var/lib/lxc/{{ container['hostname'] }}/bootstrapped ] \|\| ! touch /var/lib/lxc/{{ container['hostname'] }}/bootstrapped
     - require:
       - file: lxc_bootstrap_script
       - lxc: container-{{ container['hostname'] }}
