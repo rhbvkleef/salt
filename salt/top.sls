@@ -18,9 +18,10 @@ base:
     - mariadb.install
     - postgres
   
-  # Git server
+  # Git and Nexus server
   'trident':
     - gogs
+    - nexus
   
   # Apache proxy server
   'odyssey':
@@ -29,7 +30,3 @@ base:
     - apache.no_default_vhost
     - apache.modules
     - apache.config
-
-  # Sonatype Nexus
-  'excalibur':
-    - nexus

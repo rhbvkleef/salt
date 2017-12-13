@@ -21,7 +21,7 @@ lxc:
           to: 5432
           proto: tcp
 
-    # Git server
+    # Git and Nexus server
     - hostname: trident
       ip: 10.0.3.12
       forward_ports:
@@ -39,7 +39,3 @@ lxc:
         - from: 443
           to: 443
           proto: tcp
-
-    # Nexus
-    - hostname: excalibur
-      ip: 10.0.3.14
