@@ -4,7 +4,6 @@ HOST=""
 MASTER='salt'
 HYPERVISOR=`hostname`
 while getopts "h:i:m:" opt; do
-  echo $opt
   case $opt in
     h) HOST="$OPTARG"
     ;;
