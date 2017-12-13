@@ -17,6 +17,7 @@ base:
   'robinson':
     - mariadb.install
     - postgres
+    - sql.phpmyadmin
   
   # Git and Nexus server
   'trident':

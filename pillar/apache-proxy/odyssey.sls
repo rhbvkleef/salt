@@ -5,6 +5,7 @@ apache:
     san:
       - git.vankleef.me
       - maven.vankleef.me
+      - sql.vankleef.me
     email: webmaster@rolfvankleef.nl
   
   name_virtual_hosts:
@@ -14,7 +15,7 @@ apache:
       port: 443
 
   sites:
-    git.vankleef.me:
+    titan.vankleef.me:
       enabled: True
       port: 80
       template_file: salt://apache/vhosts/standard.tmpl
@@ -26,12 +27,17 @@ apache:
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
       
+      Formula_Append: |
+        ServerAlias git.vankleef.me
+        ServerAlias maven.vankleef.me
+        ServerAlias sql.vankleef.me
+
       Rewrite: |
         RewriteCond %{HTTPS} off [OR]
         RewriteCond %{HTTP:X-ForwardedProto} !https
         RewriteRule ^/(.*) https://%{HTTP_HOST}/$1 [NC,R=301,L]
 
-    git.vankleef.me-ssl:
+    git.vankleef.me:
       enabled: True
       port: 443
       template_file: salt://apache/vhosts/proxy.tmpl
@@ -54,7 +60,7 @@ apache:
 
       Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 
-    git.vankleef.me-ssl:
+    maven.vankleef.me:
       enabled: True
       port: 443
       template_file: salt://apache/vhosts/proxy.tmpl
@@ -77,6 +83,28 @@ apache:
 
       Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 
+    sql.vankleef.me:
+      enabled: True
+      port: 443
+      template_file: salt://apache/vhosts/proxy.tmpl
+
+      ServerName: sql.vankleef.me
+
+      ServerAdmin: webmaster@vankleef.me
+
+      LogLevel: warn
+      CustomLog: ${APACHE_LOG_DIR}/access.log
+      LogFormat: combined
+      ErrorLog: ${APACHE_LOG_DIR}/error.log
+
+      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+
+      ProxyRoute:
+        git:
+          ProxyPassTarget: 'http://10.0.3.11:80/'
+
+      Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
   modules:
     enabled:
       - proxy
