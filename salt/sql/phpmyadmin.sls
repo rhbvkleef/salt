@@ -11,3 +11,14 @@ phpmyadmin:
     - signal: restart
     - watch:
       - file: /etc/apache2/sites-enabled/phpmyadmin.conf
+
+apache2:
+  pkg.installed
+
+php:
+  pkg.installed
+
+php-mbstring:
+  pkg.installed:
+    - require:
+      - pkg: php
