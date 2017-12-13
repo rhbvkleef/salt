@@ -22,7 +22,7 @@ container-{{ container['hostname'] }}-autostart:
 {% endif %}
 
 {% if (not container['mount_homes'] is defined) or container['mount_homes'] %}
-container-{{ container['hostname'] }}-autostart:
+container-{{ container['hostname'] }}-mount-homes:
   file.append:
     - name: /var/lib/lxc/{{ container['hostname'] }}/config
     - text: lxc.mount.entry=/home home none bind 0 0
