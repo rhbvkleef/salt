@@ -24,6 +24,7 @@ salt:
       - git://github.com/saltstack-formulas/salt-formula.git
       - git://github.com/saltstack-formulas/apache-formula.git
       - git://github.com/saltstack-formulas/postgres-formula.git
+      - git://github.com/saltstack-formulas/plex-formula.git
     pillar_roots:
       base:
         - /srv/pillar

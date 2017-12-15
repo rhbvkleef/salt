@@ -39,3 +39,7 @@ lxc:
         - from: 443
           to: 443
           proto: tcp
+    
+    # Media server
+    - hostname: musashi
+      ip: 10.0.3.14

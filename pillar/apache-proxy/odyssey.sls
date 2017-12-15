@@ -105,6 +105,29 @@ apache:
           ProxyPassTarget: 'http://10.0.3.11:80/'
 
       Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
+
+    plex.vankleef.me:
+      enabled: True
+      port: 443
+      template_file: salt://apache/vhosts/proxy.tmpl
+
+      ServerName: plex.vankleef.me
+
+      ServerAdmin: webmaster@vankleef.me
+
+      LogLevel: warn
+      CustomLog: ${APACHE_LOG_DIR}/access.log
+      LogFormat: combined
+      ErrorLog: ${APACHE_LOG_DIR}/error.log
+
+      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+
+      ProxyRoute:
+        git:
+          ProxyPassTarget: 'http://10.0.3.14:32400/'
+
+      Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
   modules:
     enabled:
       - proxy

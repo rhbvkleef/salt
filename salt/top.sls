@@ -31,3 +31,7 @@ base:
     - apache.no_default_vhost
     - apache.modules
     - apache.config
+
+  # Plex server
+  'musashi':
+    - plex
