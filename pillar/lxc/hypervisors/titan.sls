@@ -43,3 +43,7 @@ lxc:
     # Media server
     - hostname: musashi
       ip: 10.0.3.14
+      forward_ports:
+        - from: 32400
+          to: 32400
+          proto: tcp
