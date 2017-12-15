@@ -35,4 +35,3 @@ base:
   # Plex server
   'musashi':
     - plex
-    - plex.mediaserver
