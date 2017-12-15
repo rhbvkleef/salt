@@ -6,6 +6,8 @@ apache:
       - git.vankleef.me
       - maven.vankleef.me
       - sql.vankleef.me
+      - torrent.vankleef.me
+      - transmission.vankleef.me
     email: webmaster@rolfvankleef.nl
   
   name_virtual_hosts:
@@ -126,6 +128,30 @@ apache:
       ProxyRoute:
         git:
           ProxyPassTarget: 'http://10.0.3.14:32400/'
+
+      Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
+
+    torrent.vankleef.me:
+      enabled: True
+      port: 443
+      template_file: salt://apache/vhosts/proxy.tmpl
+
+      ServerName: torrent.vankleef.me
+      ServerAlias: transmission.vankleef.me
+
+      ServerAdmin: webmaster@vankleef.me
+
+      LogLevel: warn
+      CustomLog: ${APACHE_LOG_DIR}/access.log
+      LogFormat: combined
+      ErrorLog: ${APACHE_LOG_DIR}/error.log
+
+      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+
+      ProxyRoute:
+        git:
+          ProxyPassTarget: 'http://10.0.3.14:9091/'
 
       Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
   modules:

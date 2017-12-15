@@ -35,3 +35,4 @@ base:
   # Plex server
   'musashi':
     - plex
+    - transmission.config

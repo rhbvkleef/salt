@@ -23,3 +23,6 @@ base:
 
   'robinson':
     - sql.robinson
+
+  'musashi':
+    - transmission

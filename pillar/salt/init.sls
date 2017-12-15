@@ -21,6 +21,7 @@ salt:
       - git://github.com/rhbvkleef/salt.git:
         - root: salt
       - git://github.com/markkimsal/saltstack-mariadb-formula.git
+      - git://github.com/kennydo/salt-transmission-formula.git
       - git://github.com/saltstack-formulas/salt-formula.git
       - git://github.com/saltstack-formulas/apache-formula.git
       - git://github.com/saltstack-formulas/postgres-formula.git
