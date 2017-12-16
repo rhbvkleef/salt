@@ -22,7 +22,7 @@ base:
   # Git and Nexus server
   'trident':
     - gogs
-    - gogs.drones
+    - gogs.drone
 
   # Apache proxy server
   'odyssey':
