@@ -12,7 +12,7 @@ drone:
       - pkg: docker
   file.managed:
     - name: /etc/drone/drone.toml
-    - source: salt://salt/gogs/drone.toml
+    - source: salt://gogs/drone.toml
     - template: jinja
     - requires:
       - pkg: drone
