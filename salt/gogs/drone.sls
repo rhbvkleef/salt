@@ -7,9 +7,7 @@ docker:
 drone:
   pkg.installed:
     - sources:
-      - drone:
-        - '{{ dist }}'
-        - '{{ dist_def }}'
+      - drone: '{{ dist }}'
     - require:
       - pkg: docker
   service.running:
