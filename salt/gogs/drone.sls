@@ -1,7 +1,7 @@
 {% set dist_def = 'http://downloads.drone.io/master/drone.deb' %}
 {% set dist = salt['pillar.get']('drone:dist', dist_def) %}
 
-docker.io:
+docker:
   pkg.latest
 
 drone:
