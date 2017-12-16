@@ -11,7 +11,7 @@ drone:
         - '{{ dist }}'
         - '{{ dist_def }}'
     - require:
-      - pkg: docker.io
+      - pkg: docker
   service.running:
     - watch:
       - pkg: drone
