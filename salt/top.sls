@@ -22,8 +22,8 @@ base:
   # Git and Nexus server
   'trident':
     - gogs
-    - nexus
-  
+    - gogs.drone
+
   # Apache proxy server
   'odyssey':
     - apache-proxy.certs

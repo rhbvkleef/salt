@@ -29,7 +29,7 @@ nexus-service:
       - cmd: nexus-move-directory
 
   service.running:
-    - name: gogs
+    - name: nexus
     - enable: True
     - require:
       - file: nexus-service
