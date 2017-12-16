@@ -4,6 +4,8 @@ apache:
     cn: titan.vankleef.me
     san:
       - git.vankleef.me
+      - ci.vankleef.me
+      - drone.vankleef.me
       - maven.vankleef.me
       - sql.vankleef.me
       - torrent.vankleef.me
@@ -45,6 +47,7 @@ apache:
       template_file: salt://apache/vhosts/proxy.tmpl
 
       ServerName: git.vankleef.me
+      ServerAlias: gogs.vankleef.me
 
       ServerAdmin: webmaster@vankleef.me
 
@@ -59,6 +62,30 @@ apache:
       ProxyRoute:
         git:
           ProxyPassTarget: 'http://10.0.3.12:3000/'
+
+      Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
+
+    ci.vankleef.me:
+      enabled: True
+      port: 443
+      template_file: salt://apache/vhosts/proxy.tmpl
+
+      ServerName: ci.vankleef.me
+      ServerAlias: drone.vankleef.me
+
+      ServerAdmin: webmaster@vankleef.me
+
+      LogLevel: warn
+      CustomLog: ${APACHE_LOG_DIR}/access.log
+      LogFormat: combined
+      ErrorLog: ${APACHE_LOG_DIR}/error.log
+
+      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+
+      ProxyRoute:
+        git:
+          ProxyPassTarget: 'http://10.0.3.12:80/'
 
       Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 

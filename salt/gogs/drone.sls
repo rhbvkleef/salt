@@ -10,6 +10,12 @@ drone:
       - drone: '{{ dist }}'
     - require:
       - pkg: docker
+  file.managed:
+    - name: /etc/drone/drone.toml
+    - source: salt://salt/gogs/drone.toml
+    - template: jinja
+    - requires:
+      - pkg: drone
   service.running:
     - watch:
-      - pkg: drone
+      - file: drone
