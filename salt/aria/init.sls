@@ -1,0 +1,2 @@
+pkg.latest:
+  aria2
