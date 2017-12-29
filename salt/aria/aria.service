@@ -1,0 +1,15 @@
+[Unit]
+Description=Aria - The next generation download utility
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/lib/aria/downloads/
+ExecStart=aria2c --rpc-listen-all=true --rpc-secret={{ pillar['aria']['secret'] }} --enable-rpc
+User=root
+Group=root
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
