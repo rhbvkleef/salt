@@ -1,10 +1,4 @@
 aria2:
-  file.directory:
-    - name: /var/lib/aria/downloads/
-    - makedirs: True
-    - user: root
-    - group: root
-
   pkg.latest:
     - name: aria2
 
@@ -19,8 +13,16 @@ aria2:
     - requires:
       - file: aria2
 
-start-aria:
+aria2-downloads-folder-present:
+  file.directory:
+    - name: /var/lib/aria/downloads/
+    - makedirs: True
+    - user: root
+    - group: root
+
+start-aria2-service:
   service.running:
     - name: aria2
     - requires:
       - file: aria2
+      - file: aria2-downloads-folder-present
