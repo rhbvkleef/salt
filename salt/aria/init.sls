@@ -5,22 +5,22 @@ aria2:
     - user: root
     - group: root
 
-  pkg.latest
+  pkg.latest:
+    - name: aria2
 
   file.managed:
-    - name: /etc/systemd/system/aria.service
+    - name: /etc/systemd/system/aria2.service
     - source: salt://aria/aria.service
     - requires:
       - file: aria2
       - pkg: aria2
 
   service.enabled:
-    - name: aria
     - requires:
       - file: aria2
 
 start-aria:
   service.running:
-    - name: aria
+    - name: aria2
     - requires:
       - file: aria2
