@@ -36,3 +36,4 @@ base:
   'musashi':
     - plex
     - transmission.config
+    - aria
