@@ -5,6 +5,7 @@ aria2:
   file.managed:
     - name: /etc/systemd/system/aria2.service
     - source: salt://aria/aria.service
+    - template: jinja
     - requires:
       - file: aria2
       - pkg: aria2
