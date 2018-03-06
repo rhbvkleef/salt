@@ -47,3 +47,11 @@ lxc:
         - from: 32400
           to: 32400
           proto: tcp
+
+    # Pandora server
+    - hostname: twilight
+      ip: 10.0.3.15
+      forward_ports:
+        - from: 22
+          to: 2222
+          proto: tcp
