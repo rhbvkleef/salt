@@ -1,15 +1,13 @@
 [Unit]
-Description=Nexus - A binary code host
-After=syslog.target
+Description=nexus service
 After=network.target
 
 [Service]
-Type=simple
-WorkingDirectory=/opt/nexus/nexus
-ExecStart=/opt/nexus/nexus/bin/nexus
-User=root
-Group=root
-Restart=always
+Type=forking
+ExecStart=/opt/nexus/bin/nexus start
+ExecStop=/opt/nexus/bin/nexus stop
+User=nexus
+Restart=on-abort
 
 [Install]
 WantedBy=multi-user.target

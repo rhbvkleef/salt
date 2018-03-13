@@ -5,8 +5,10 @@ apache:
     san:
       - git.vankleef.me
       - ci.vankleef.me
-      - drone.vankleef.me
+      - teamcity.vankleef.me
       - maven.vankleef.me
+      - nexus.vankleef.me
+      - npm.vankleef.me
       - sql.vankleef.me
       - torrent.vankleef.me
       - transmission.vankleef.me
@@ -73,7 +75,7 @@ apache:
       template_file: salt://apache/vhosts/proxy.tmpl
 
       ServerName: ci.vankleef.me
-      ServerAlias: drone.vankleef.me
+      ServerAlias: teamcity.vankleef.me
 
       ServerAdmin: webmaster@vankleef.me
 
@@ -85,18 +87,22 @@ apache:
       SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
       SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
 
-      ProxyRoute:
-        git:
-          ProxyPassTarget: 'http://10.0.3.12:80/'
+      Formula_Append: |
+        ProxyPass         /app/subscriptions ws://10.0.3.12:8111/app/subscriptions
+        ProxyPassReverse  /app/subscriptions ws://10.0.3.12:8111/app/subscriptions
+        ProxyPass         / http://10.0.3.12:8111/
+        ProxyPassReverse  / http://10.0.3.12:8111/
+        Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 
-      Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 
-    maven.vankleef.me:
+    nexus.vankleef.me:
       enabled: True
       port: 443
       template_file: salt://apache/vhosts/proxy.tmpl
 
-      ServerName: maven.vankleef.me
+      ServerName: nexus.vankleef.me
+      ServerAlias: npm.vankleef.me
+      ServerAlias: maven.vankleef.me
 
       ServerAdmin: webmaster@vankleef.me
 
@@ -110,7 +116,7 @@ apache:
 
       ProxyRoute:
         git:
-          ProxyPassTarget: 'http://10.0.3.14:8081/'
+          ProxyPassTarget: 'http://10.0.3.12:8081/'
 
       Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 

@@ -23,6 +23,7 @@ base:
   'trident':
     - gogs
     - gogs.drone
+    - nexus
 
   # Apache proxy server
   'odyssey':

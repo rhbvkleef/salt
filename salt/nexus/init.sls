@@ -1,38 +1,20 @@
-nexus-download:
-  file.managed:
-    - name: /opt/nexus/latest.tgz
-    - source: http://download.sonatype.com/nexus/3/latest-unix.tar.gz
-    - user: root
-    - group: root
-
-nexus-extract-and-preclean:
-  cmd.wait:
-    - watch:
-      - file: download
-    - name: tar xf latest.tgz
-    - cwd: /opt/nexus
-  file.absent:
-    - name: /opt/nexus/nexus
-
-nexus-move-directory:
-  cmd.wait:
-    - watch:
-      - cmd: extract
-      - file: extract
-    - name: mv nexus* nexus
+openjdk-8-jre:
+  pkg:
+    - latest
 
 nexus-service:
+  cmd.run:
+    - cwd: /opt
+    - name: wget https://sonatype-download.global.ssl.fastly.net/repository/repositoryManager/3/nexus-3.9.0-01-unix.tar.gz && tar -xzf nexus-3.9.0-01-unix.tar.gz && mv nexus-3.9.0-01 nexus
+    - unless: test -d "/opt/nexus"
   file.managed:
     - name: /etc/systemd/system/nexus.service
-    - source: salt://nexus/files/nexus.service
-    - requires:
-      - cmd: nexus-move-directory
-
+    - source: salt://services/nexus/files/nexus.service
+    - require:
+      - cmd: nexus-service
+      - pkg: openjdk-8-jre
   service.running:
     - name: nexus
     - enable: True
     - require:
-      - file: nexus-service
-    - watch:
-      - cmd: nexus-move-directory
       - file: nexus-service
