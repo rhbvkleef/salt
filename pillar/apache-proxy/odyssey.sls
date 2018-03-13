@@ -37,7 +37,6 @@ apache:
       
       Formula_Append: |
         ServerAlias git.vankleef.me
-        ServerAlias maven.vankleef.me
         ServerAlias sql.vankleef.me
 
       Rewrite: |
@@ -101,8 +100,9 @@ apache:
       template_file: salt://apache/vhosts/proxy.tmpl
 
       ServerName: nexus.vankleef.me
-      ServerAlias: npm.vankleef.me
-      ServerAlias: maven.vankleef.me
+      Formula_Append: |
+        ServerAlias npm.vankleef.me
+        ServerAlias maven.vankleef.me
 
       ServerAdmin: webmaster@vankleef.me
 
