@@ -9,7 +9,7 @@ nexus-service:
     - unless: test -d "/opt/nexus"
   file.managed:
     - name: /etc/systemd/system/nexus.service
-    - source: salt://services/nexus/files/nexus.service
+    - source: salt://nexus/files/nexus.service
     - require:
       - cmd: nexus-service
       - pkg: openjdk-8-jre
