@@ -34,10 +34,6 @@ apache:
       CustomLog: ${APACHE_LOG_DIR}/access.log combined
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
-      
-      Formula_Append: |
-        ServerAlias git.vankleef.me
-        ServerAlias sql.vankleef.me
 
       Rewrite: |
         RewriteCond %{HTTPS} off [OR]
@@ -66,7 +62,10 @@ apache:
         git:
           ProxyPassTarget: 'http://10.0.3.12:3000/'
 
-      Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
+      Formula_Append: |
+        ServerAlias git.vankleef.me
+        ServerAlias sql.vankleef.me
+        Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 
     ci.vankleef.me:
       enabled: True
