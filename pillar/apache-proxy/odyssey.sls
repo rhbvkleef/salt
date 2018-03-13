@@ -99,9 +99,6 @@ apache:
       template_file: salt://apache/vhosts/proxy.tmpl
 
       ServerName: nexus.vankleef.me
-      Formula_Append: |
-        ServerAlias npm.vankleef.me
-        ServerAlias maven.vankleef.me
 
       ServerAdmin: webmaster@vankleef.me
 
@@ -117,7 +114,10 @@ apache:
         git:
           ProxyPassTarget: 'http://10.0.3.12:8081/'
 
-      Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
+      Formula_Append: |
+        ServerAlias npm.vankleef.me
+        ServerAlias maven.vankleef.me
+        Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 
     sql.vankleef.me:
       enabled: True
