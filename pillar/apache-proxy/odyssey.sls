@@ -14,6 +14,8 @@ apache:
       - transmission.vankleef.me
       - aria.vankleef.me
       - aria2.vankleef.me
+      - telegram.vankleef.me
+      - pandora.vankleef.me
     email: webmaster@rolfvankleef.nl
   
   name_virtual_hosts:
@@ -210,6 +212,52 @@ apache:
       ProxyRoute:
         git:
           ProxyPassTarget: 'http://10.0.3.14:6800/'
+
+      Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
+
+    telegram.vankleef.me:
+      enabled: True
+      port: 443
+      template_file: salt://apache/vhosts/proxy.tmpl
+
+      ServerName: telegram.vankleef.me
+
+      ServerAdmin: webmaster@vankleef.me
+
+      LogLevel: warn
+      CustomLog: ${APACHE_LOG_DIR}/access.log
+      LogFormat: combined
+      ErrorLog: ${APACHE_LOG_DIR}/error.log
+
+      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+
+      ProxyRoute:
+        telegram:
+          ProxyPassTarget: 'http://10.0.3.15:8080/'
+
+      Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
+
+    pandora.vankleef.me:
+      enabled: True
+      port: 443
+      template_file: salt://apache/vhosts/proxy.tmpl
+
+      ServerName: pandora.vankleef.me
+
+      ServerAdmin: webmaster@vankleef.me
+
+      LogLevel: warn
+      CustomLog: ${APACHE_LOG_DIR}/access.log
+      LogFormat: combined
+      ErrorLog: ${APACHE_LOG_DIR}/error.log
+
+      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+
+      ProxyRoute:
+        telegram:
+          ProxyPassTarget: 'http://10.0.3.15:8000/'
 
       Formula_Append: Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
   modules:
