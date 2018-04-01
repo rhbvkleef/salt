@@ -1,23 +1,5 @@
 # ``apache`` formula configuration:
 apache:
-  pki:
-    cn: titan.vankleef.me
-    san:
-      - git.vankleef.me
-      - ci.vankleef.me
-      - teamcity.vankleef.me
-      - maven.vankleef.me
-      - nexus.vankleef.me
-      - npm.vankleef.me
-      - sql.vankleef.me
-      - torrent.vankleef.me
-      - transmission.vankleef.me
-      - aria.vankleef.me
-      - aria2.vankleef.me
-      - telegram.vankleef.me
-      - pandora.vankleef.me
-    email: webmaster@rolfvankleef.nl
-  
   name_virtual_hosts:
     - interface: '*'
       port: 80
@@ -57,8 +39,8 @@ apache:
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
 
-      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
-      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+      SSLCertificateFile: /etc/letsencrypt/live/vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/vankleef.me/privkey.pem
 
       ProxyRoute:
         git:
@@ -84,8 +66,8 @@ apache:
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
 
-      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
-      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+      SSLCertificateFile: /etc/letsencrypt/live/vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/vankleef.me/privkey.pem
 
       Formula_Append: |
         ProxyPass         /app/subscriptions ws://10.0.3.12:8111/app/subscriptions
@@ -109,8 +91,8 @@ apache:
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
 
-      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
-      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+      SSLCertificateFile: /etc/letsencrypt/live/vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/vankleef.me/privkey.pem
 
       ProxyRoute:
         git:
@@ -135,8 +117,8 @@ apache:
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
 
-      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
-      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+      SSLCertificateFile: /etc/letsencrypt/live/vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/vankleef.me/privkey.pem
 
       ProxyRoute:
         git:
@@ -158,8 +140,8 @@ apache:
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
 
-      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
-      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+      SSLCertificateFile: /etc/letsencrypt/live/vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/vankleef.me/privkey.pem
 
       ProxyRoute:
         git:
@@ -182,8 +164,8 @@ apache:
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
 
-      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
-      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+      SSLCertificateFile: /etc/letsencrypt/live/vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/vankleef.me/privkey.pem
 
       ProxyRoute:
         git:
@@ -206,8 +188,8 @@ apache:
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
 
-      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
-      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+      SSLCertificateFile: /etc/letsencrypt/live/vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/vankleef.me/privkey.pem
 
       ProxyRoute:
         git:
@@ -229,8 +211,8 @@ apache:
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
 
-      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
-      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+      SSLCertificateFile: /etc/letsencrypt/live/vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/vankleef.me/privkey.pem
 
       ProxyRoute:
         telegram:
@@ -252,8 +234,8 @@ apache:
       LogFormat: combined
       ErrorLog: ${APACHE_LOG_DIR}/error.log
 
-      SSLCertificateFile: /etc/letsencrypt/live/titan.vankleef.me/fullchain.pem
-      SSLCertificateKeyFile: /etc/letsencrypt/live/titan.vankleef.me/privkey.pem
+      SSLCertificateFile: /etc/letsencrypt/live/vankleef.me/fullchain.pem
+      SSLCertificateKeyFile: /etc/letsencrypt/live/vankleef.me/privkey.pem
 
       ProxyRoute:
         telegram:

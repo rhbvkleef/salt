@@ -27,7 +27,6 @@ base:
 
   # Apache proxy server
   'odyssey':
-    - apache-proxy.certs
     - apache.vhosts.standard
     - apache.no_default_vhost
     - apache.modules
